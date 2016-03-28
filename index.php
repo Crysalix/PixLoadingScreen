@@ -17,6 +17,11 @@ $json = file_get_contents($url);
 $table = json_decode($json, true);
 $userData = $table['response']['players'][0];
 
+//Load Random Song
+$dir = $_SERVER['DOCUMENT_ROOT'].'/content/sounds/';
+$song = array_diff(scandir($dir), array('..', '.'));
+$randsound = rand(1, sizeof($song));
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,6 +33,9 @@ $userData = $table['response']['players'][0];
         <title>My Loading Screen</title>
     </head>
     <body>
+        <audio id="loadingsound" autoplay loop>
+            <source src="/content/sounds/sound<?php echo $randsound; ?>.ogg" type="audio/ogg">
+        </audio>
         <header>
         </header>
         <section>
